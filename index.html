@@ -1,0 +1,829 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diamond Corp. | william goldberg diamond corp</title>
+  <meta name="description" content="Home - Diamond Corp. provides professional diamonds and precious stones services. Specializing in william goldberg diamond corp.">
+  <meta name="keywords" content="william goldberg diamond corp, diamond international corp, ibn diamond corp, diamond exporter">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Diamond Corp. | william goldberg diamond corp">
+  <meta property="og:description" content="Home - Diamond Corp. provides professional diamonds and precious stones services. Specializing in william goldberg diamond corp.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diamond Corp. | william goldberg diamond corp">
+  <meta name="twitter:description" content="Home - Diamond Corp. provides professional diamonds and precious stones services. Specializing in william goldberg diamond corp.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'e9096560-d00b-49d6-a7d5-abc55ad181ba',
+    apiUrl: 'https://qaapi.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="Diamond Corp." class="logo" />
+      </a>
+    </div>
+
+    <ul class="nav-menu" id="navMenu"><li><a href="/stones">Stones</a></li><li><a href="/about">About</a></li></ul>
+
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">Contact</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="home-hero-section" data-layout-spec="Home-hero" data-hero-type="fullscreen-scrim">
+  <!-- Background image layer -->
+  <div class="home-hero-bg-wrap">
+    <img data-hero-bg="true" data-placeholder="home-hero-image-1" data-context="Cinematic close-up of a flawless round brilliant diamond resting on a dark polished obsidian surface, dramatic studio lighting with precise caustic light refractions casting prismatic spectral rays across the near-black background, ultra-high-resolution macro photography, luxury jewelry editorial style, deep blacks with controlled specular highlights, single diamond as the hero subject floating in shadow" width="1440" height="900" src="/assets/site-home-hero-image-1.webp" alt="Flawless brilliant diamond on dark obsidian surface with prismatic light refractions" class="home-hero-bg-img">
+    <!-- Light sweep animation overlay -->
+    <div class="home-hero-sweep" aria-hidden="true"></div>
+  </div>
+
+  <!-- Scrim gradient overlay -->
+  <div class="home-hero-scrim" aria-hidden="true"></div>
+
+  <!-- Content overlay -->
+  <div class="home-hero-content-wrap">
+    <div class="home-hero-content">
+      <!-- Eyebrow label -->
+      <p class="home-hero-eyebrow">Diamond Corp. &nbsp;—&nbsp; Est. Since Excellence</p>
+
+      <!-- H1 headline -->
+      <h1 class="home-hero-h1">Diamonds,<br>Precisely Chosen.</h1>
+
+      <!-- Gold accent rule -->
+      <div class="home-hero-gold-rule" aria-hidden="true"></div>
+
+      <!-- H3 subline -->
+      <h3 class="home-hero-h3">Every stone selected for rarity, brilliance,<br class="home-hero-br"> and enduring worth.</h3>
+
+      <!-- CTA row -->
+      <div class="home-hero-cta-row">
+        <a href="/stones" class="home-hero-btn-primary">Explore Stones</a>
+        <a href="/contact" class="home-hero-btn-secondary">Talk to an Expert</a>
+      </div>
+
+      <!-- Credibility line -->
+      <p class="home-hero-credibility">GIA-certified origins &amp; full provenance transparency — every stone, every time.</p>
+    </div>
+  </div>
+
+  <!-- Bottom faceted prism divider -->
+  <div class="home-hero-divider-wrapper" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" class="home-hero-divider-svg">
+      <!-- Faceted angled planes -->
+      <path d="M0,88 L0,62 L180,44 L360,68 L540,38 L720,60 L900,36 L1080,58 L1260,42 L1440,56 L1440,88 Z" fill="#0E1014"></path>
+      <!-- Rim light: cyan-to-amethyst gradient stroke along the cut edge -->
+      <defs>
+        <linearGradient id="hh-rim-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00D4FF" stop-opacity="0.55"></stop>
+          <stop offset="38%" stop-color="#00D4FF" stop-opacity="0.30"></stop>
+          <stop offset="62%" stop-color="#7C3AED" stop-opacity="0.30"></stop>
+          <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.55"></stop>
+        </linearGradient>
+      </defs>
+      <polyline points="0,62 180,44 360,68 540,38 720,60 900,36 1080,58 1260,42 1440,56" fill="none" stroke="url(#hh-rim-grad)" stroke-width="1.5"></polyline>
+    </svg>
+  </div>
+</section>
+
+<section class="home-gallery-section" data-layout-spec="Home-gallery">
+  <div class="home-gallery-container">
+    <div class="home-gallery-intro">
+      <h2 class="home-gallery-heading">Featured Stones</h2>
+      <p class="home-gallery-subtext">A curated selection of exceptional diamonds and precious stones, chosen for their extraordinary optical performance, fire, and scintillation. Each specimen is a testament to nature's precision—sourced and verified to the exacting standards of Diamond Corp.</p>
+    </div>
+
+    <div class="home-gallery-grid">
+
+      <!-- Card 1 -->
+      <article class="home-gallery-card">
+        <div class="home-gallery-card-image-wrap">
+          <img data-placeholder="home-gallery-image-1" data-context="Macro photography of a round brilliant cut diamond on a near-black velvet surface, showing intense prismatic light dispersion with rainbow fire and sharp facet reflections, ultra high contrast studio lighting, luxury gemstone photography" width="600" height="400" src="/assets/site-home-gallery-image-1.webp" alt="Round brilliant cut diamond with prismatic fire">
+          <div class="home-gallery-card-image-overlay"></div>
+        </div>
+        <div class="home-gallery-card-body">
+          <div class="home-gallery-card-meta">
+            <span class="home-gallery-label">Round Brilliant</span>
+            <span class="home-gallery-spec">1.00 – 3.00 ct</span>
+          </div>
+          <h3 class="home-gallery-card-title">Eternal Round</h3>
+          <p class="home-gallery-card-desc">Unmatched symmetry produces a corona of white light and vivid spectral dispersion. The ideal proportions of this cut maximise brilliance, delivering a scintillation pattern that dances with every movement.</p>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="home-gallery-card">
+        <div class="home-gallery-card-image-wrap">
+          <img data-placeholder="home-gallery-image-2" data-context="Macro photography of an emerald cut diamond on near-black background, showing long parallel facets with deep hall-of-mirrors effect, crisp step-cut clarity, controlled specular highlights, luxury gemstone photography" width="600" height="400" src="/assets/site-home-gallery-image-2.webp" alt="Emerald cut diamond with hall-of-mirrors clarity">
+          <div class="home-gallery-card-image-overlay"></div>
+        </div>
+        <div class="home-gallery-card-body">
+          <div class="home-gallery-card-meta">
+            <span class="home-gallery-label">Emerald Step Cut</span>
+            <span class="home-gallery-spec">1.50 – 4.00 ct</span>
+          </div>
+          <h3 class="home-gallery-card-title">Vault Mirror</h3>
+          <p class="home-gallery-card-desc">The stepped rectangular facets create a hypnotic hall-of-mirrors effect. Prized for its architectural clarity and glacial transparency, this cut rewards exceptional internal purity with a timeless, understated elegance.</p>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="home-gallery-card">
+        <div class="home-gallery-card-image-wrap">
+          <img data-placeholder="home-gallery-image-3" data-context="Macro photography of a cushion cut diamond on near-black surface, soft rounded corners with crushed ice scintillation pattern, warm spectral fire, dramatic studio lighting with controlled reflections, luxury gemstone photography" width="600" height="400" src="/assets/site-home-gallery-image-3.webp" alt="Cushion cut diamond with crushed ice scintillation">
+          <div class="home-gallery-card-image-overlay"></div>
+        </div>
+        <div class="home-gallery-card-body">
+          <div class="home-gallery-card-meta">
+            <span class="home-gallery-label">Cushion Cut</span>
+            <span class="home-gallery-spec">1.20 – 3.50 ct</span>
+          </div>
+          <h3 class="home-gallery-card-title">Soft Radiance</h3>
+          <p class="home-gallery-card-desc">Rounded corners soften the brilliance into a warm, crushed-ice scintillation. The generous crown height captures ambient light from wide angles, producing a romantic, glowing character with exceptional colour saturation.</p>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="home-gallery-card">
+        <div class="home-gallery-card-image-wrap">
+          <img data-placeholder="home-gallery-image-4" data-context="Macro photography of a pear shaped diamond on near-black velvet, elegant teardrop silhouette with sharp culet point, brilliant cut facets showing intense white light and rainbow dispersion, luxury gemstone studio photography" width="600" height="400" src="/assets/site-home-gallery-image-4.webp" alt="Pear shaped diamond with brilliant fire and teardrop silhouette">
+          <div class="home-gallery-card-image-overlay"></div>
+        </div>
+        <div class="home-gallery-card-body">
+          <div class="home-gallery-card-meta">
+            <span class="home-gallery-label">Pear Shape</span>
+            <span class="home-gallery-spec">0.80 – 2.50 ct</span>
+          </div>
+          <h3 class="home-gallery-card-title">Apex Teardrop</h3>
+          <p class="home-gallery-card-desc">The tapered point concentrates light into a singular apex of fire, while the rounded shoulder distributes brilliance evenly. A silhouette of sculptural tension that elongates the eye with effortless grace.</p>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="home-gallery-card">
+        <div class="home-gallery-card-image-wrap">
+          <img data-placeholder="home-gallery-image-5" data-context="Macro photography of a vivid blue sapphire gemstone on near-black background, deep royal blue color with velvety saturation, brilliant cut facets with internal blue glow and subtle asterism, luxury precious stone photography" width="600" height="400" src="/assets/site-home-gallery-image-5.webp" alt="Vivid blue sapphire with deep royal color and internal glow">
+          <div class="home-gallery-card-image-overlay"></div>
+        </div>
+        <div class="home-gallery-card-body">
+          <div class="home-gallery-card-meta">
+            <span class="home-gallery-label">Blue Sapphire</span>
+            <span class="home-gallery-spec">2.00 – 6.00 ct</span>
+          </div>
+          <h3 class="home-gallery-card-title">Royal Velvet</h3>
+          <p class="home-gallery-card-desc">A velvety royal blue of extraordinary saturation, sourced from premier deposits. The colour holds depth under all lighting conditions—neither too dark to lose transparency nor too pale to diminish its commanding presence.</p>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="home-gallery-card">
+        <div class="home-gallery-card-image-wrap">
+          <img data-placeholder="home-gallery-image-6" data-context="Macro photography of a vivid green emerald gemstone on near-black background, rich forest green color with natural inclusions visible as jardin, octagonal step cut facets, controlled studio lighting, luxury precious stone photography" width="600" height="400" src="/assets/site-home-gallery-image-6.webp" alt="Vivid green emerald with natural jardin inclusions and step cut facets">
+          <div class="home-gallery-card-image-overlay"></div>
+        </div>
+        <div class="home-gallery-card-body">
+          <div class="home-gallery-card-meta">
+            <span class="home-gallery-label">Colombian Emerald</span>
+            <span class="home-gallery-spec">1.50 – 5.00 ct</span>
+          </div>
+          <h3 class="home-gallery-card-title">Verdant Garden</h3>
+          <p class="home-gallery-card-desc">The characteristic jardin—nature's own fingerprint—animates the interior with a living, organic luminosity. A deep forest green that shifts in warmth under candlelight, prized by connoisseurs as a diamond exporter would prize a flawless D.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Bottom diagonal divider transitioning to light section -->
+  <div class="home-gallery-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="galleryDividerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="var(--bg-light)" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="var(--bg-light)" stop-opacity="1"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,90 L0,70 L1200,20 L1200,90 Z" fill="url(#galleryDividerGrad)"></path>
+    </svg>
+    <div class="home-gallery-hairline"></div>
+  </div>
+</section>
+
+<section class="home-services-section" data-layout-spec="Home-services">
+  <div class="home-services-container">
+
+    <!-- START COLUMN -->
+    <div class="home-services-start">
+      <p class="home-services-eyebrow">Our Process</p>
+      <h2 class="home-services-h2">How We Curate Quality.</h2>
+      <p class="home-services-intro">Every stone that passes through Diamond Corp. is evaluated against four foundational pillars — cut precision, clarity grading, colour consistency, and verified provenance. Each gem is independently certified, ensuring our clients receive not just beauty, but documented truth.</p>
+
+      <div class="home-services-blocks">
+
+        <article class="home-services-block">
+          <div class="home-services-block-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polygon points="11,2 20,7.5 20,14.5 11,20 2,14.5 2,7.5" stroke="currentColor" stroke-width="1.4" fill="none"></polygon>
+              <line x1="11" y1="2" x2="11" y2="20" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"></line>
+              <line x1="2" y1="7.5" x2="20" y2="14.5" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"></line>
+              <line x1="20" y1="7.5" x2="2" y2="14.5" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"></line>
+            </svg>
+          </div>
+          <div class="home-services-block-body">
+            <h3 class="home-services-block-h3">Optical Performance Review</h3>
+            <p>We assess every diamond's light behaviour under controlled spectral conditions — evaluating brilliance, fire, and scintillation against international cut standards. Stones that fail our optical threshold are returned, not resold.</p>
+          </div>
+        </article>
+
+        <article class="home-services-block">
+          <div class="home-services-block-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="2" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.4" fill="none"></rect>
+              <line x1="7" y1="7" x2="15" y2="7" stroke="currentColor" stroke-width="1.2"></line>
+              <line x1="7" y1="11" x2="15" y2="11" stroke="currentColor" stroke-width="1.2"></line>
+              <line x1="7" y1="15" x2="11" y2="15" stroke="currentColor" stroke-width="1.2"></line>
+              <circle cx="17" cy="17" r="3.5" fill="none" stroke="currentColor" stroke-width="1.2"></circle>
+              <line x1="15.5" y1="17" x2="18.5" y2="17" stroke="currentColor" stroke-width="1"></line>
+              <line x1="17" y1="15.5" x2="17" y2="18.5" stroke="currentColor" stroke-width="1"></line>
+            </svg>
+          </div>
+          <div class="home-services-block-body">
+            <h3 class="home-services-block-h3">Certification &amp; Documentation</h3>
+            <p>Every stone is accompanied by grading reports from recognised independent laboratories. Documentation covers the 4Cs, fluorescence, polish, and symmetry. Full traceability records are issued alongside each purchase, forming a permanent stone identity file.</p>
+          </div>
+        </article>
+
+        <article class="home-services-block">
+          <div class="home-services-block-icon">
+            <svg data-element-type="icon" data-icon-type="svg" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.4" fill="none"></circle>
+              <path d="M11 2 Q13 6 11 11 Q9 16 11 20" stroke="currentColor" stroke-width="1" fill="none"></path>
+              <line x1="2" y1="11" x2="20" y2="11" stroke="currentColor" stroke-width="1"></line>
+              <path d="M4.5 6 Q11 8 17.5 6" stroke="currentColor" stroke-width="1" fill="none"></path>
+              <path d="M4.5 16 Q11 14 17.5 16" stroke="currentColor" stroke-width="1" fill="none"></path>
+            </svg>
+          </div>
+          <div class="home-services-block-body">
+            <h3 class="home-services-block-h3">Sourcing Integrity</h3>
+            <p>As a responsible diamond exporter, we partner exclusively with suppliers who comply with the Kimberley Process and maintain transparent supply chain disclosures. Origin disclosure is provided wherever available, with detailed sourcing notes appended to each stone's documentation.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- END COLUMN -->
+    <div class="home-services-end">
+      <div class="home-services-spec-panel">
+
+        <figure class="home-services-spec-image">
+          <img data-placeholder="home-services-image-1" data-context="A macro close-up of a flawless round brilliant diamond resting on a dark slate surface, illuminated with cool white light revealing internal reflections and spectral fire. The stone is set against a near-black background with subtle light refractions. Ultra-high detail, luxury product photography style." width="480" height="260" src="/assets/site-home-services-image-1.webp" alt="Flawless round brilliant diamond under controlled lighting showing optical performance">
+        </figure>
+
+        <div class="home-services-spec-content">
+          <p class="home-services-spec-label">Verification Standards</p>
+          <ul class="home-services-checklist">
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Independent third-party grading on every stone</span>
+            </li>
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Origin disclosure where supply chain permits</span>
+            </li>
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Full 4Cs grading report included with purchase</span>
+            </li>
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Pre-sale inspection notes on file</span>
+            </li>
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Kimberley Process compliance verified</span>
+            </li>
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Professional care &amp; storage guidance issued</span>
+            </li>
+            <li>
+              <span class="home-services-check-icon" aria-hidden="true">
+                <svg data-element-type="icon" data-icon-type="svg" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><polyline points="2,7 5.5,10.5 12,3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+              </span>
+              <span>Fluorescence and symmetry data on record</span>
+            </li>
+          </ul>
+
+          <p class="home-services-spec-note">Every document we issue reflects our commitment to transparent, accountable gem trading — from first inspection to final delivery.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Divider: fog-to-noir with cyan arc -->
+  <div class="home-services-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Fog-to-noir fill -->
+      <path d="M0,100 L0,38 Q150,28 300,42 T600,32 Q750,24 900,38 T1200,30 L1200,100 Z" fill="#0F1115"></path>
+      <!-- Thin cyan arc stroke -->
+      <path d="M0,58 Q200,42 400,54 T800,44 Q1000,38 1200,50" stroke="#00D4FF" stroke-width="1.2" fill="none" opacity="0.45" stroke-linecap="round"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="home-testimonials-section" data-layout-spec="Home-testimonials">
+  <div class="home-testimonials-section .ht-container">
+
+    <!-- Intro Block -->
+    <div class="ht-intro">
+      <h2 class="ht-heading">Trusted for What Matters.</h2>
+      <p class="ht-subtext">Every stone we handle carries a story of precision, transparency, and absolute confidence. Our clients trust Diamond Corp. not just for the quality of each gem, but for the clarity of guidance at every step.</p>
+    </div>
+
+    <!-- Testimonial Cards -->
+    <div class="ht-cards-grid">
+
+      <article class="ht-card">
+        <div class="ht-card-inner">
+          <span class="ht-quote-mark" aria-hidden="true">“</span>
+          <p class="ht-quote">The verification process was unlike anything I had experienced before. Every detail was explained with complete transparency — I left with total confidence in my acquisition.</p>
+          <div class="ht-attribution">
+            <span class="ht-name">Catherine L.</span>
+            <span class="ht-context">Private Collector, Geneva</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ht-card">
+        <div class="ht-card-inner">
+          <span class="ht-quote-mark" aria-hidden="true">“</span>
+          <p class="ht-quote">Their expert guidance through a complex estate acquisition was exceptional. The level of precision in their assessments reflects decades of serious knowledge in the field of precious stones.</p>
+          <div class="ht-attribution">
+            <span class="ht-name">Marcus R.</span>
+            <span class="ht-context">Estate Advisor, New York</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="ht-card">
+        <div class="ht-card-inner">
+          <span class="ht-quote-mark" aria-hidden="true">“</span>
+          <p class="ht-quote">Working with Diamond Corp. felt different from the start — measured, unhurried, and deeply informed. Their clarity of process gave me complete peace of mind throughout the entire experience.</p>
+          <div class="ht-attribution">
+            <span class="ht-name">Isabelle M.</span>
+            <span class="ht-context">Independent Jewellery Designer, Paris</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Trust Strip -->
+    <div class="ht-trust-strip">
+
+      <div class="ht-trust-item">
+        <svg class="ht-trust-icon" data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"></path>
+        </svg>
+        <p class="ht-trust-text">GIA &amp; IGI Certified Stones</p>
+      </div>
+
+      <div class="ht-trust-divider" aria-hidden="true"></div>
+
+      <div class="ht-trust-item">
+        <svg class="ht-trust-icon" data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <p class="ht-trust-text">Secure &amp; Insured Handling</p>
+      </div>
+
+      <div class="ht-trust-divider" aria-hidden="true"></div>
+
+      <div class="ht-trust-item">
+        <svg class="ht-trust-icon" data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"></path>
+          <path d="M17 11l1.5 1.5L21 10"></path>
+        </svg>
+        <p class="ht-trust-text">Dedicated Expert Guidance</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Faceted Wave Bottom Divider -->
+  <div class="ht-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ht-amethyst-glow-1" cx="38%" cy="100%" r="28%" gradientUnits="objectBoundingBox">
+          <stop offset="0%" stop-color="rgba(124,58,237,0.22)"></stop>
+          <stop offset="100%" stop-color="rgba(124,58,237,0)"></stop>
+        </radialGradient>
+        <radialGradient id="ht-amethyst-glow-2" cx="72%" cy="100%" r="22%" gradientUnits="objectBoundingBox">
+          <stop offset="0%" stop-color="rgba(124,58,237,0.18)"></stop>
+          <stop offset="100%" stop-color="rgba(124,58,237,0)"></stop>
+        </radialGradient>
+      </defs>
+      <!-- Glow layers at the deep angle points -->
+      <ellipse cx="456" cy="90" rx="180" ry="55" fill="url(#ht-amethyst-glow-1)"></ellipse>
+      <ellipse cx="864" cy="90" rx="140" ry="45" fill="url(#ht-amethyst-glow-2)"></ellipse>
+      <!-- Faceted wave path: fills the bottom portion -->
+      <path d="M0,90 L0,52 L80,44 L160,58 L240,36 L320,50 L400,28 L456,14 L520,34 L600,48 L680,30 L760,46 L820,22 L864,10 L920,30 L1000,50 L1080,38 L1160,54 L1200,42 L1200,90 Z" fill="#07080A"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="home-cta-section" data-layout-spec="Home-cta">
+  <div class="home-cta-bg-layer" aria-hidden="true">
+    <div class="home-cta-vignette"></div>
+    <div class="home-cta-gradient-haze"></div>
+  </div>
+  <div class="home-cta-container">
+    <div class="home-cta-eyebrow">
+      <span class="home-cta-diamond-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-element-type="icon" data-icon-type="svg">
+          <path d="M8 1L14 6L8 15L2 6L8 1Z" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+          <path d="M2 6H14" stroke="currentColor" stroke-width="1.2"></path>
+          <path d="M5 1L4 6L8 15" stroke="currentColor" stroke-width="0.8" opacity="0.5"></path>
+          <path d="M11 1L12 6L8 15" stroke="currentColor" stroke-width="0.8" opacity="0.5"></path>
+        </svg>
+      </span>
+      <span class="home-cta-eyebrow-text">Diamond Corp.</span>
+      <span class="home-cta-diamond-icon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" data-element-type="icon" data-icon-type="svg">
+          <path d="M8 1L14 6L8 15L2 6L8 1Z" stroke="currentColor" stroke-width="1.2" fill="none"></path>
+          <path d="M2 6H14" stroke="currentColor" stroke-width="1.2"></path>
+          <path d="M5 1L4 6L8 15" stroke="currentColor" stroke-width="0.8" opacity="0.5"></path>
+          <path d="M11 1L12 6L8 15" stroke="currentColor" stroke-width="0.8" opacity="0.5"></path>
+        </svg>
+      </span>
+    </div>
+    <h2 class="home-cta-heading">Request a Curated Recommendation.</h2>
+    <p class="home-cta-body">Share your vision, occasion, or preference with our specialists — and receive expert guidance on the finest diamonds and precious stones, personally selected for you.</p>
+    <div class="home-cta-actions">
+      <a href="/contact" class="home-cta-btn-primary">Contact Us</a>
+    </div>
+    <div class="home-cta-secondary-link-wrap">
+      <a href="/stones" class="home-cta-secondary-link">View Stones</a>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-top"><div class="footer-container"><div class="footer-grid"><div class="footer-col footer-brand"><img src="/assets/business-logo.webp" alt="Diamond Corp." class="logo" /><p class="brand-tagline">Exceptional diamonds and precious stones, crafted for those who seek timeless elegance.</p><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-nav"><h4 class="footer-heading"><span class="heading-gem">◆</span> Quick Links</h4><ul class="footer-links"><li><a href="/stones">Stones</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="footer-col footer-contact"><h4 class="footer-heading"><span class="heading-gem">◆</span> Contact Us</h4><ul class="contact-list"><li><a href="/"><i class="fas fa-envelope"></i><span>[business_email]</span></a></li><li><a href="/"><i class="fas fa-phone"></i><span>[business_phone]</span></a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div></div></div></div><div class="footer-bottom"><div class="footer-container"><div class="footer-bottom-inner"><p class="copyright">© 2026 Diamond Corp.. All rights reserved.</p><nav class="legal-links"><a href="/privacy">Privacy Policy</a><span class="divider">|</span><a href="/terms">Terms &amp; Conditions</a><span class="divider">|</span><a href="/accessibility">Accessibility</a></nav><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>

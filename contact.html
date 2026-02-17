@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Diamond Corp.</title>
+  <meta name="description" content="Contact - Diamond Corp. provides professional diamonds and precious stones services. Specializing in william goldberg diamond corp.">
+  <meta name="keywords" content="william goldberg diamond corp, diamond international corp, ibn diamond corp, diamond exporter">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Contact - Diamond Corp.">
+  <meta property="og:description" content="Contact - Diamond Corp. provides professional diamonds and precious stones services. Specializing in william goldberg diamond corp.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact - Diamond Corp.">
+  <meta name="twitter:description" content="Contact - Diamond Corp. provides professional diamonds and precious stones services. Specializing in william goldberg diamond corp.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'e9096560-d00b-49d6-a7d5-abc55ad181ba',
+    apiUrl: 'https://qaapi.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="Diamond Corp." class="logo" />
+      </a>
+    </div>
+
+    <ul class="nav-menu" id="navMenu"><li><a href="/stones">Stones</a></li><li><a href="/about">About</a></li></ul>
+
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">Contact</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="contact-intro-section" data-layout-spec="Contact-intro">
+  <div class="contact-intro-container">
+    <!-- START: Content Column -->
+    <div class="contact-intro-content">
+      <div class="contact-intro-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-label">Diamond Corp.</span>
+      </div>
+      <h1 class="contact-intro-h1">Contact<br>My Business.</h1>
+      <h3 class="contact-intro-h3">Clear answers, carefully guided.</h3>
+      <p class="contact-intro-body">Share your preferences, the occasion you have in mind, and your timeline — we'll take it from there. As a trusted diamond exporter, Diamond Corp. is built on transparency: no pressure, no hidden costs, no ambiguity. Whether you're exploring for the first time or seeking a specific stone, every conversation begins with listening.</p>
+      <div class="contact-intro-cta-row">
+        <a href="#contact-form" class="btn-primary contact-intro-btn">Begin a Conversation</a>
+        <a href="mailto:[business_email]" class="btn-ghost contact-intro-ghost">or email directly →</a>
+      </div>
+    </div>
+    <!-- END: Image Column -->
+    <div class="contact-intro-image-col">
+      <div class="contact-intro-image-frame">
+        <div class="frame-corner frame-corner--tl"></div>
+        <div class="frame-corner frame-corner--tr"></div>
+        <div class="frame-corner frame-corner--bl"></div>
+        <div class="frame-corner frame-corner--br"></div>
+        <img data-placeholder="contact-intro-image-1" data-context="Extreme macro photograph of a round brilliant diamond resting on a polished obsidian surface inside a minimalist studio. The stone is lit from above with a single narrow beam of white light, creating razor-sharp prismatic reflections and a deep shadow beneath. The background is near-black with subtle cyan light scatter. The composition is vertical, centered, and utterly calm — evoking a luxury display case. No props, no clutter." width="540" height="680" src="/assets/site-contact-intro-image-1.webp" alt="A brilliant diamond captured in macro detail on a dark studio surface, reflecting light with prismatic precision">
+        <div class="image-inner-glow"></div>
+      </div>
+      <p class="contact-intro-image-caption">Each stone, personally assessed.</p>
+    </div>
+  </div>
+  <!-- Bottom Divider: gradient scrim + gold hairline -->
+  <div class="contact-intro-divider-wrapper" aria-hidden="true">
+    <div class="contact-intro-gold-line"></div>
+    <div class="contact-intro-scrim"></div>
+  </div>
+</section>
+
+<section class="contact-contact-section" data-layout-spec="Contact-contact">
+  <div class="contact-contact-section__container">
+    <div class="contact-contact-section__grid">
+
+      <!-- START COLUMN: Form -->
+      <div class="contact-contact-section__form-col">
+        <h2 class="contact-contact-section__heading">Send a Message.</h2>
+        <p class="contact-contact-section__intro">Fill in the form below and a Diamond Corp. specialist will personally review your enquiry. Whether you're exploring our collection or seeking a bespoke commission, we respond to every message with the care it deserves.</p>
+
+        <form class="contact-form contact-contact-section__form" action="#" method="post" novalidate="">
+          <div class="contact-contact-section__field">
+            <label class="contact-contact-section__label" for="contact-name">Full Name</label>
+            <input class="contact-contact-section__input" type="text" id="contact-name" name="name" placeholder="Your full name" autocomplete="name">
+          </div>
+
+          <div class="contact-contact-section__field">
+            <label class="contact-contact-section__label" for="contact-email">Email Address</label>
+            <input class="contact-contact-section__input" type="email" id="contact-email" name="email" placeholder="your@email.com" autocomplete="email">
+          </div>
+
+          <div class="contact-contact-section__field">
+            <label class="contact-contact-section__label" for="contact-phone">Phone Number</label>
+            <input class="contact-contact-section__input" type="tel" id="contact-phone" name="phone" placeholder="+1 (000) 000-0000" autocomplete="tel">
+          </div>
+
+          <div class="contact-contact-section__field">
+            <label class="contact-contact-section__label" for="contact-message">Message</label>
+            <textarea class="contact-contact-section__input contact-contact-section__textarea" id="contact-message" name="message" rows="5" placeholder="Tell us about your enquiry…"></textarea>
+          </div>
+
+          <button class="contact-contact-section__submit btn-primary" type="submit">Send Enquiry</button>
+        </form>
+      </div>
+
+      <!-- END COLUMN: Contact Details -->
+      <div class="contact-contact-section__details-col">
+        <div class="contact-contact-section__details-card">
+          <div class="contact-contact-section__details-accent-bar"></div>
+
+          <h3 class="contact-contact-section__details-heading">Contact Details</h3>
+
+          <div class="contact-contact-section__detail-block">
+            <small class="contact-contact-section__detail-label">Email</small>
+            <p class="contact-contact-section__detail-value"><a href="mailto:[business_email]" class="contact-contact-section__detail-link">[business_email]</a></p>
+          </div>
+
+          <div class="contact-contact-section__detail-block">
+            <small class="contact-contact-section__detail-label">Phone</small>
+            <p class="contact-contact-section__detail-value"><a href="tel:[business_phone]" class="contact-contact-section__detail-link">[business_phone]</a></p>
+          </div>
+
+          <div class="contact-contact-section__detail-block">
+            <small class="contact-contact-section__detail-label">Address</small>
+            <p class="contact-contact-section__detail-value">[business_address]</p>
+          </div>
+
+          <div class="contact-contact-section__detail-block">
+            <small class="contact-contact-section__detail-label">Business Hours</small>
+            <p class="contact-contact-section__detail-value">Monday – Friday: 9:00 AM – 6:00 PM<br>Saturday: 10:00 AM – 4:00 PM<br>Sunday: By Appointment Only</p>
+          </div>
+
+          <div class="contact-contact-section__response-note">
+            <svg data-element-type="icon" data-icon-type="svg" class="contact-contact-section__response-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <p class="contact-contact-section__response-text">We aim to respond to all enquiries within one business day. For urgent matters, please call us directly.</p>
+          </div>
+
+          <div class="contact-contact-section__social-row">
+            <a href="https://facebook.com/[facebook_handle]" target="_blank" rel="noopener noreferrer" class="contact-contact-section__social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/[instagram_handle]" target="_blank" rel="noopener noreferrer" class="contact-contact-section__social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/[whatsapp_handle]" target="_blank" rel="noopener noreferrer" class="contact-contact-section__social-link" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+
+          <a href="https://maps.google.com/?q=[business_address]" target="_blank" rel="noopener noreferrer" class="contact-contact-section__map-link">
+            <i class="fas fa-map-marker-alt"></i> View on Map
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom SVG Divider: faceted soft curve transitioning to dark -->
+  <div class="contact-contact-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,55 Q150,30 300,48 Q450,65 600,35 Q750,5 900,48 Q1050,68 1200,52 L1200,90 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="contact-assurances-section" data-layout-spec="Contact-assurances">
+  <div class="ca-container">
+    <div class="ca-header">
+      <h2 class="ca-heading">Confidence by Design.</h2>
+      <p class="ca-intro">Every stone we present is backed by rigorous verification, expert documentation, and the kind of attentive guidance that transforms a purchase into a legacy. At Diamond Corp., assurance is not an afterthought — it is the foundation of every relationship we build.</p>
+    </div>
+
+    <div class="ca-cards">
+
+      <article class="ca-card">
+        <div class="ca-card-icon">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="6" y="4" width="24" height="28" rx="2"></rect>
+            <line x1="11" y1="12" x2="25" y2="12"></line>
+            <line x1="11" y1="17" x2="25" y2="17"></line>
+            <line x1="11" y1="22" x2="20" y2="22"></line>
+            <polyline points="21 26 23 28 27 24"></polyline>
+          </svg>
+        </div>
+        <h3 class="ca-card-title">Documented Quality</h3>
+        <p class="ca-card-text">Every diamond and precious stone we offer is accompanied by internationally recognised certification — GIA, IGI, or equivalent — so you have complete, verifiable proof of provenance, grading, and authenticity before any decision is made.</p>
+      </article>
+
+      <article class="ca-card">
+        <div class="ca-card-icon">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 3 L30 8 L30 18 C30 25 24 31 18 33 C12 31 6 25 6 18 L6 8 Z"></path>
+            <polyline points="13 18 16.5 21.5 23 15"></polyline>
+          </svg>
+        </div>
+        <h3 class="ca-card-title">Careful Handling</h3>
+        <p class="ca-card-text">From the moment a stone is selected to the instant it reaches you, every step is managed with precision and care. Our team of expert gemologists ensures that each piece is inspected, secured, and transported to the highest standards of the trade.</p>
+      </article>
+
+      <article class="ca-card">
+        <div class="ca-card-icon">
+          <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="18" r="13"></circle>
+            <path d="M13 14 C13 11 23 11 23 14 C23 17 18 17 18 20"></path>
+            <circle cx="18" cy="25" r="1" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </div>
+        <h3 class="ca-card-title">Respectful Privacy</h3>
+        <p class="ca-card-text">We understand that acquiring exceptional stones is a deeply personal matter. All consultations, transactions, and client details are handled with absolute discretion. Your confidence and privacy are protected at every stage of our relationship.</p>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="ca-image-strip">
+    <img data-placeholder="contact-assurances-image-1" data-context="Extreme macro photography of a loose diamond resting on a dark polished surface, showing intricate internal facets refracting cyan and white light into geometric prismatic patterns. Ultra-close detail, abstract and cinematic, near-black background, shallow depth of field with soft bokeh edges, luxury diamond exporter aesthetic." width="1200" height="220" src="/assets/site-contact-assurances-image-1.webp" alt="Abstract macro facets of a diamond refracting light">
+    <div class="ca-strip-vignette" aria-hidden="true"></div>
+  </div>
+
+  <div class="ca-divider-wrapper" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,70 0,38 600,4 1200,38 1200,70" fill="#F6F7F9"></polygon>
+      <polyline points="0,38 600,4 1200,38" fill="none" stroke="rgba(0,212,255,0.45)" stroke-width="1.2"></polyline>
+    </svg>
+  </div>
+</section>
+
+<section class="contact-faq-section" data-layout-spec="Contact-faq">
+  <div class="contact-faq-container">
+    <div class="contact-faq-header">
+      <h2 class="contact-faq-title">Questions.</h2>
+      <p class="contact-faq-intro">If you don't find what you're looking for below, we welcome you to reach out directly. Every inquiry at Diamond Corp. is handled with the same care and precision we bring to every stone.</p>
+    </div>
+    <div class="contact-faq-grid">
+      <article class="contact-faq-item">
+        <h3 class="contact-faq-question">Are your diamonds certified?</h3>
+        <p class="contact-faq-answer">Every diamond we offer is accompanied by a grading report from a recognized independent laboratory — most commonly the GIA or IGI. These certificates document the stone's cut, color, clarity, and carat weight, giving you complete confidence in your purchase.</p>
+      </article>
+      <article class="contact-faq-item">
+        <h3 class="contact-faq-question">How do you ensure ethical sourcing?</h3>
+        <p class="contact-faq-answer">Transparency is foundational to our practice. We work exclusively with suppliers who comply with the Kimberley Process Certification Scheme and maintain full chain-of-custody documentation. We are happy to share provenance details for any stone upon request.</p>
+      </article>
+      <article class="contact-faq-item">
+        <h3 class="contact-faq-question">How are stone recommendations made?</h3>
+        <p class="contact-faq-answer">Our specialists take time to understand your intentions — whether a gift, an heirloom, or an investment — before presenting curated options. Recommendations are guided by your preferences, budget, and the technical qualities that best serve your purpose, never by inventory pressure.</p>
+      </article>
+      <article class="contact-faq-item">
+        <h3 class="contact-faq-question">Do you offer custom or bespoke pieces?</h3>
+        <p class="contact-faq-answer">Yes. We collaborate with master craftspeople to create entirely bespoke settings for our stones. From initial sketch to final polish, you are involved at every stage. Contact us to begin a consultation for a one-of-a-kind commission.</p>
+      </article>
+      <article class="contact-faq-item">
+        <h3 class="contact-faq-question">How should I care for my diamond jewelry?</h3>
+        <p class="contact-faq-answer">Diamonds are remarkably durable, but settings and metals require attention. We recommend gentle cleaning with warm water and a soft brush, avoiding harsh chemicals. Store pieces individually in soft pouches to prevent scratching. Annual professional inspections keep prongs and settings secure.</p>
+      </article>
+      <article class="contact-faq-item">
+        <h3 class="contact-faq-question">What distinguishes Diamond Corp. from other diamond exporters?</h3>
+        <p class="contact-faq-answer">Our reputation rests on decades of rigorous selection and an unwillingness to compromise on quality. As a trusted diamond exporter, we combine deep gemological expertise with a deeply personal approach — every client relationship is built on discretion, honesty, and long-term trust.</p>
+      </article>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-top"><div class="footer-container"><div class="footer-grid"><div class="footer-col footer-brand"><img src="/assets/business-logo.webp" alt="Diamond Corp." class="logo" /><p class="brand-tagline">Exceptional diamonds and precious stones, crafted for those who seek timeless elegance.</p><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-nav"><h4 class="footer-heading"><span class="heading-gem">◆</span> Quick Links</h4><ul class="footer-links"><li><a href="/stones">Stones</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li></ul></div><div class="footer-col footer-contact"><h4 class="footer-heading"><span class="heading-gem">◆</span> Contact Us</h4><ul class="contact-list"><li><a href="/"><i class="fas fa-envelope"></i><span>[business_email]</span></a></li><li><a href="/"><i class="fas fa-phone"></i><span>[business_phone]</span></a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div></div></div></div><div class="footer-bottom"><div class="footer-container"><div class="footer-bottom-inner"><p class="copyright">© 2026 Diamond Corp.. All rights reserved.</p><nav class="legal-links"><a href="/privacy">Privacy Policy</a><span class="divider">|</span><a href="/terms">Terms &amp; Conditions</a><span class="divider">|</span><a href="/accessibility">Accessibility</a></nav><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
