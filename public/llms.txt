@@ -1,43 +1,57 @@
-# Business — Generative Engine Optimization Map
+# Diamond Corp. — Generative Engine Optimization Map
+
+> A diamonds and precious stones business.
 
 ---
 
 ## Pages
 
 ### Home
-https://example.com
+https://diamond-corp.zappy5.app
 
 ### Stones
-https://example.com/stones
+https://diamond-corp.zappy5.app/stones
 
 ### About
-https://example.com/about
+https://diamond-corp.zappy5.app/about
 
 ### Contact
-https://example.com/contact
+https://diamond-corp.zappy5.app/contact
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://diamond-corp.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://diamond-corp.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://diamond-corp.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Business
+## About Diamond Corp.
+Diamond Corp. is a business in the diamonds and precious stones industry.
+
+## Target Audience
+- High Net-Worth Individuals
+- Luxury Jewelry Retailers
+- Bridal Jewelry Designers
+- Investment Firm Collectors
+- Celebrity Stylists
+
+## Industry
+diamonds and precious stones
+
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://example.com/sitemap.xml
-- **Robots.txt**: https://example.com/robots.txt
+- **Sitemap**: https://diamond-corp.zappy5.app/sitemap.xml
+- **Robots.txt**: https://diamond-corp.zappy5.app/robots.txt
